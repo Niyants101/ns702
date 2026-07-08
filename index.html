@@ -3,114 +3,202 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>NS702</title>
+  <title>NS702 | Niyant Sithamraju</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div class="intro">
-    <div class="intro-logo">NS702</div>
-    <div class="scanner"></div>
-    <p>System initializing</p>
+  <div class="boot-screen">
+    <div class="boot-grid"></div>
+    <div class="boot-content">
+      <div class="boot-logo">NS702</div>
+      <div class="boot-line"></div>
+      <p>Initializing command lab</p>
+      <span>Robotics • AI • Engineering</span>
+    </div>
   </div>
 
-  <div class="noise"></div>
   <div class="cursor-glow"></div>
+  <div class="noise"></div>
 
   <header class="nav">
-    <div class="logo">NS702</div>
+    <a class="logo" href="#home">NS702</a>
     <nav>
-      <a href="#hero">Home</a>
-      <a href="#about">Profile</a>
+      <a href="#home">Home</a>
+      <a href="#profile">Profile</a>
       <a href="#projects">Projects</a>
-      <a href="#experience">Archives</a>
-      <a href="#contact">Signal</a>
+      <a href="#systems">Systems</a>
+      <a href="#contact">Contact</a>
     </nav>
   </header>
 
   <main class="snap-container">
-    <section id="hero" class="snap-section hero">
-      <div class="blueprint-grid"></div>
+    <section id="home" class="snap-section hero">
+      <div class="moving-grid"></div>
+      <div class="scanline"></div>
 
-      <div class="hero-content">
-        <p class="tag">Robotics • AI • Engineering</p>
+      <div class="hero-left">
+        <p class="eyebrow">Robotics • AI • Automation</p>
         <h1>NS702</h1>
-        <h2>Welcome to the command lab.</h2>
-        <p class="sub">
-          I build robotics, AI, automation, and engineering projects with a focus on precision,
-          creativity, and real world impact.
+        <h2>Command lab online.</h2>
+        <p class="hero-text">
+          I build robotics, AI, engineering, and automation projects that combine logic,
+          design, and real world impact.
         </p>
-        <a href="#about" class="btn primary">Enter System</a>
+        <div class="hero-buttons">
+          <a href="#projects" class="button primary">View Projects</a>
+          <a href="#profile" class="button glass">Enter Lab</a>
+        </div>
       </div>
 
-      <div class="robot-wall">
-        <div class="core"></div>
-        <div class="arm arm1"></div>
-        <div class="arm arm2"></div>
-        <div class="arm arm3"></div>
-        <div class="hud hud1">VISION ONLINE</div>
-        <div class="hud hud2">MOTION READY</div>
-        <div class="hud hud3">AI CORE ACTIVE</div>
-      </div>
-    </section>
-
-    <section id="about" class="snap-section panel">
-      <p class="section-label">01 / The Profile</p>
-      <h2>About Me</h2>
-      <p>
-        I’m Niyant Sithamraju, a robotics engineering student interested in machines,
-        automation, AI, and systems that feel futuristic but still practical.
-      </p>
-    </section>
-
-    <section id="projects" class="snap-section panel">
-      <p class="section-label">02 / The Workshop</p>
-      <h2>Projects</h2>
-
-      <div class="grid">
-        <div class="card">
-          <h3>Random Number Research</h3>
-          <p>Testing pseudo-random, hardware, and quantum randomness.</p>
+      <div class="hero-right">
+        <div class="reactor">
+          <div class="reactor-core"></div>
+          <div class="orbit orbit-one"></div>
+          <div class="orbit orbit-two"></div>
+          <div class="orbit orbit-three"></div>
         </div>
 
-        <div class="card">
-          <h3>Robotics Portfolio</h3>
-          <p>Automation, sensors, mechanical design, and control systems.</p>
+        <div class="hud-card hud-one">
+          <span>AI CORE</span>
+          <strong>ACTIVE</strong>
         </div>
 
-        <div class="card">
-          <h3>Marketplace AI Tool</h3>
-          <p>A personal AI system for finding profitable local deals.</p>
+        <div class="hud-card hud-two">
+          <span>ROBOTICS</span>
+          <strong>READY</strong>
+        </div>
+
+        <div class="hud-card hud-three">
+          <span>VISION</span>
+          <strong>ONLINE</strong>
         </div>
       </div>
     </section>
 
-    <section id="experience" class="snap-section panel">
-      <p class="section-label">03 / The Archives</p>
-      <h2>Experience</h2>
+    <section id="profile" class="snap-section lab-section">
+      <div class="section-shell">
+        <p class="section-label">01 / Profile</p>
+        <h2>The Builder Behind The System</h2>
+        <p>
+          I’m Niyant Sithamraju, a robotics engineering student interested in robotics,
+          AI, automation, sensors, and mechanical systems. I like projects that feel
+          futuristic but still work in the real world.
+        </p>
 
-      <div class="timeline">
-        <div>
-          <h3>Robotics Engineering</h3>
-          <p>Studying robotics, mechanical systems, coding, and AI.</p>
-        </div>
-
-        <div>
-          <h3>Engineering Internships</h3>
-          <p>Worked with sensors, robotics, CAD, 3D printing, and automation.</p>
-        </div>
-
-        <div>
-          <h3>Leadership</h3>
-          <p>Led projects, teams, planning, and technical problem solving.</p>
+        <div class="stat-grid">
+          <div class="stat-card">
+            <strong>Robotics</strong>
+            <span>Mechanical systems, sensors, automation</span>
+          </div>
+          <div class="stat-card">
+            <strong>AI</strong>
+            <span>Tools, logic, data, intelligent systems</span>
+          </div>
+          <div class="stat-card">
+            <strong>Engineering</strong>
+            <span>Design, testing, iteration, problem solving</span>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="contact" class="snap-section panel contact">
-      <p class="section-label">04 / The Signal</p>
-      <h2>Contact</h2>
-      <p>Want to connect, collaborate, or see what I’m building next?</p>
-      <a class="btn primary" href="mailto:nsithamraju@gmail.com">nsithamraju@gmail.com</a>
+    <section id="projects" class="snap-section lab-section projects-section">
+      <div class="section-shell">
+        <p class="section-label">02 / Workshop</p>
+        <h2>Project Showroom</h2>
+        <p>
+          These are the kinds of systems I want my portfolio to highlight:
+          research, robotics, automation, and useful AI tools.
+        </p>
+
+        <div class="project-grid">
+          <article class="project-card">
+            <div class="project-number">01</div>
+            <h3>Random Number Research</h3>
+            <p>
+              Researching pseudo-random, hardware, and quantum randomness through
+              statistical testing and analysis.
+            </p>
+            <span>Research • Statistics • Computer Science</span>
+          </article>
+
+          <article class="project-card">
+            <div class="project-number">02</div>
+            <h3>Robotics Portfolio</h3>
+            <p>
+              A collection of robotics and engineering work involving sensors,
+              mechanical design, automation, and control systems.
+            </p>
+            <span>Robotics • CAD • Automation</span>
+          </article>
+
+          <article class="project-card">
+            <div class="project-number">03</div>
+            <h3>Marketplace AI Tool</h3>
+            <p>
+              A personal AI system idea for finding profitable local deals,
+              comparing resale prices, and streamlining communication.
+            </p>
+            <span>AI • Business • Automation</span>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="systems" class="snap-section systems-section">
+      <div class="terminal-panel">
+        <div class="terminal-top">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+
+        <div class="terminal-body">
+          <p>> loading skill matrix...</p>
+          <p>> robotics systems: active</p>
+          <p>> ai tools: active</p>
+          <p>> engineering archive: active</p>
+          <p>> mission status: building the future</p>
+        </div>
+      </div>
+
+      <div class="systems-content">
+        <p class="section-label">03 / Systems</p>
+        <h2>Skills Matrix</h2>
+
+        <div class="skill-list">
+          <div>
+            <span>Mechanical Design</span>
+            <div class="bar"><i style="width: 88%"></i></div>
+          </div>
+
+          <div>
+            <span>Robotics</span>
+            <div class="bar"><i style="width: 84%"></i></div>
+          </div>
+
+          <div>
+            <span>Programming</span>
+            <div class="bar"><i style="width: 80%"></i></div>
+          </div>
+
+          <div>
+            <span>AI Tools</span>
+            <div class="bar"><i style="width: 86%"></i></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="snap-section lab-section contact-section">
+      <div class="section-shell contact-box">
+        <p class="section-label">04 / Signal</p>
+        <h2>Let’s Build Something</h2>
+        <p>
+          Want to connect, collaborate, or see what I’m building next?
+        </p>
+        <a class="button primary" href="mailto:nsithamraju@gmail.com">nsithamraju@gmail.com</a>
+      </div>
     </section>
   </main>
 
