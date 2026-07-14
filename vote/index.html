@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Vote | NS702</title>
+  <link rel="stylesheet" href="/style.css" />
+
+  <style>
+    .vote-page {
+      min-height: 100vh;
+      padding: 140px 8vw 80px;
+    }
+
+    .vote-header {
+      max-width: 900px;
+      margin-bottom: 40px;
+    }
+
+    .vote-header h1 {
+      font-size: clamp(3rem, 8vw, 7rem);
+      margin: 0;
+      letter-spacing: 0.08em;
+    }
+
+    .vote-header p {
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 1.1rem;
+      line-height: 1.7;
+    }
+
+    .vote-grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+    }
+
+    .vote-card {
+      border: 1px solid rgba(120, 210, 255, 0.25);
+      background: rgba(10, 18, 30, 0.72);
+      backdrop-filter: blur(18px);
+      border-radius: 24px;
+      padding: 28px;
+      box-shadow: 0 0 40px rgba(0, 180, 255, 0.08);
+      transition: 0.25s ease;
+    }
+
+    .vote-card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(120, 210, 255, 0.55);
+      box-shadow: 0 0 50px rgba(0, 180, 255, 0.16);
+    }
+
+    .vote-card h2 {
+      margin-top: 0;
+      font-size: 1.6rem;
+    }
+
+    .vote-card p {
+      color: rgba(255, 255, 255, 0.72);
+      line-height: 1.6;
+    }
+
+    .vote-meta {
+      color: #7ee7ff;
+      font-size: 0.9rem;
+      margin: 18px 0;
+    }
+
+    .vote-count {
+      font-size: 2rem;
+      font-weight: 800;
+      margin: 16px 0;
+    }
+
+    .vote-button {
+      width: 100%;
+      border: 1px solid rgba(126, 231, 255, 0.5);
+      background: linear-gradient(135deg, rgba(0, 180, 255, 0.22), rgba(125, 255, 210, 0.12));
+      color: white;
+      padding: 14px 16px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+    }
+
+    .vote-button:hover {
+      background: linear-gradient(135deg, rgba(0, 180, 255, 0.36), rgba(125, 255, 210, 0.2));
+    }
+
+    .vote-status {
+      margin-top: 28px;
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    @media (max-width: 900px) {
+      .vote-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="cursor-glow"></div>
+  <div class="noise"></div>
+
+  <header class="nav">
+    <a class="logo" href="/">NS702</a>
+    <nav>
+      <a href="/">Home</a>
+      <a href="/profile/">Profile</a>
+      <a href="/projects/">Projects</a>
+      <a href="/systems/">Systems</a>
+      <a href="/vote/">Vote</a>
+      <a href="/contact/">Contact</a>
+    </nav>
+  </header>
+
+  <main class="vote-page">
+    <section class="vote-header">
+      <p class="eyebrow">Monthly Build Protocol</p>
+      <h1>BUILD VOTE</h1>
+      <p>
+        Three concepts enter the lab. One gets built. Vote for the next NS702 project and help decide what goes from idea to prototype.
+      </p>
+    </section>
+
+    <section id="voteGrid" class="vote-grid"></section>
+
+    <p id="voteStatus" class="vote-status">Loading build options...</p>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+  <script>
+    const SUPABASE_URL = "https://gcgzgxdyophhvccmzpxo.supabase.co/rest/v1/";
+    const SUPABASE_ANON_KEY = "sb_publishable_gEhvK5jsdrnumxd7aRPOHg_2R7JJZUd";
+
+    const MONTH_KEY = "2026-07";
+
+    const client = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+    const voteGrid = document.getElementById("voteGrid");
+    const voteStatus = document.getElementById("voteStatus");
+
+    function getVoterId() {
+      let voterId = localStorage.getItem("ns702_voter_id");
+
+      if (!voterId) {
+        voterId = crypto.randomUUID();
+        localStorage.setItem("ns702_voter_id", voterId);
+      }
+
+      return voterId;
+    }
+
+    async function loadVotePage() {
+      voteStatus.textContent = "Loading build options...";
+
+      const { data: options, error: optionsError } = await client
+        .from("build_options")
+        .select("*")
+        .eq("month_key", MONTH_KEY)
+        .eq("active", true)
+        .order("created_at", { ascending: true });
+
+      if (optionsError) {
+        voteStatus.textContent = "Error loading build options.";
+        console.error(optionsError);
+        return;
+      }
+
+      const { data: votes, error: votesError } = await client
+        .from("build_votes")
+        .select("option_id")
+        .eq("month_key", MONTH_KEY);
+
+      if (votesError) {
+        voteStatus.textContent = "Error loading votes.";
+        console.error(votesError);
+        return;
+      }
+
+      const counts = {};
+
+      for (const vote of votes) {
+        counts[vote.option_id] = (counts[vote.option_id] || 0) + 1;
+      }
+
+      voteGrid.innerHTML = "";
+
+      for (const option of options) {
+        const count = counts[option.id] || 0;
+
+        const card = document.createElement("article");
+        card.className = "vote-card";
+
+        card.innerHTML = `
+          <h2>${option.title}</h2>
+          <p>${option.description}</p>
+          <div class="vote-meta">${option.difficulty || "Unknown"} • ${option.tags || "NS702 Build"}</div>
+          <div class="vote-count">${count} vote${count === 1 ? "" : "s"}</div>
+          <button class="vote-button" data-id="${option.id}">CAST VOTE</button>
+        `;
+
+        voteGrid.appendChild(card);
+      }
+
+      document.querySelectorAll(".vote-button").forEach(button => {
+        button.addEventListener("click", () => castVote(button.dataset.id));
+      });
+
+      voteStatus.textContent = "Vote for the build you want to see next.";
+    }
+
+    async function castVote(optionId) {
+      const voterId = getVoterId();
+
+      voteStatus.textContent = "Submitting vote...";
+
+      const { error } = await client
+        .from("build_votes")
+        .upsert(
+          {
+            option_id: optionId,
+            month_key: MONTH_KEY,
+            voter_id: voterId
+          },
+          {
+            onConflict: "month_key,voter_id"
+          }
+        );
+
+      if (error) {
+        voteStatus.textContent = "Vote failed. Check console for details.";
+        console.error(error);
+        return;
+      }
+
+      voteStatus.textContent = "Vote recorded. You can change your vote anytime this month.";
+      loadVotePage();
+    }
+
+    loadVotePage();
+  </script>
+
+  <script src="/script.js"></script>
+</body>
+</html>
