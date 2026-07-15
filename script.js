@@ -170,6 +170,44 @@ function printTerminal(text) {
   terminalOutput.scrollTop = terminalOutput.scrollHeight;
 }
 
+function revealSecretLab() {
+  let flash = document.querySelector(".secret-lab-flash");
+
+  if (!flash) {
+    flash = document.createElement("div");
+    flash.className = "secret-lab-flash";
+    document.body.appendChild(flash);
+  }
+
+  let link = document.querySelector(".secret-lab-access");
+
+  if (!link) {
+    link = document.createElement("a");
+    link.href = "/lab.html";
+    link.className = "secret-lab-access";
+    link.textContent = "LAB NOTES";
+    document.body.appendChild(link);
+  }
+
+  sessionStorage.setItem("ns702LabUnlocked", "true");
+
+  flash.classList.add("show");
+
+  setTimeout(() => {
+    link.classList.add("unlocked");
+  }, 250);
+
+  setTimeout(() => {
+    flash.classList.remove("show");
+  }, 1100);
+
+  showToast("RESTRICTED LAYER UNLOCKED");
+}
+
+if (sessionStorage.getItem("ns702LabUnlocked") === "true") {
+  revealSecretLab();
+}
+
 function runCommand(rawCommand) {
   const command = rawCommand.trim().toLowerCase();
 
@@ -190,7 +228,6 @@ function runCommand(rawCommand) {
       "web\n" +
       "detective\n" +
       "normal\n" +
-      "lab\n" +
       "mission\n" +
       "clear"
     );
@@ -209,6 +246,9 @@ function runCommand(rawCommand) {
   } else if (command === "contact") {
     printTerminal("Signal channel opened.");
     window.location.href = "/contact/";
+  } else if (command === "secret page") {
+    printTerminal("Hidden command accepted.\nRestricted layer appearing in the top right corner.");
+    revealSecretLab();
   } else if (command === "element") {
     printTerminal("Element 702 synthesis incomplete.\nCurrent status: theory stable.\nPrototype required.");
     showToast("Synthesis test started");
@@ -226,9 +266,6 @@ function runCommand(rawCommand) {
     document.body.classList.remove("detective");
     printTerminal("Normal archive mode restored.");
     showToast("Normal mode restored");
-  } else if (command === "lab") {
-    printTerminal("Redirecting to secret lab notes...");
-    window.location.href = "/lab.html";
   } else if (command === "mission") {
     printTerminal("Mission: build systems that survive contact with reality.");
   } else if (command === "clear") {
@@ -275,7 +312,7 @@ window.addEventListener("keydown", (event) => {
   if (typedKeys.includes("702")) {
     showToast("ARCHIVE 702 UNLOCKED");
     openTerminal();
-    printTerminal("Hidden trigger detected.\nType lab to open secret lab notes.");
+    printTerminal("Hidden trigger detected.\nThere are deeper commands than help shows.");
     typedKeys = "";
   }
 });
