@@ -1,9 +1,11 @@
 const glow = document.querySelector(".cursor-glow");
 
-window.addEventListener("mousemove", (event) => {
-  glow.style.left = event.clientX + "px";
-  glow.style.top = event.clientY + "px";
-});
+if (glow) {
+  window.addEventListener("mousemove", (event) => {
+    glow.style.left = event.clientX + "px";
+    glow.style.top = event.clientY + "px";
+  });
+}
 
 const tiltCards = document.querySelectorAll(".project-card, .stat-card");
 
