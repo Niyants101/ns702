@@ -139,6 +139,30 @@ const terminalOutput = document.getElementById("terminalOutput");
 const synthesisCore = document.getElementById("synthesisCore");
 const toast = document.getElementById("toast");
 
+const TERMINAL_HISTORY_KEY = "ns702TerminalHistory";
+const DEFAULT_TERMINAL_TEXT = 'Type "help" to begin.';
+
+function saveTerminalHistory() {
+  if (!terminalOutput) return;
+  sessionStorage.setItem(TERMINAL_HISTORY_KEY, terminalOutput.textContent);
+}
+
+function loadTerminalHistory() {
+  if (!terminalOutput) return;
+
+  const savedHistory = sessionStorage.getItem(TERMINAL_HISTORY_KEY);
+
+  if (savedHistory) {
+    terminalOutput.textContent = savedHistory;
+  } else {
+    terminalOutput.textContent = DEFAULT_TERMINAL_TEXT;
+  }
+
+  terminalOutput.scrollTop = terminalOutput.scrollHeight;
+}
+
+loadTerminalHistory();
+
 function showToast(message) {
   if (!toast) return;
 
@@ -155,6 +179,10 @@ function openTerminal() {
 
   terminal.classList.add("open");
   terminalInput.focus();
+
+  if (terminalOutput) {
+    terminalOutput.scrollTop = terminalOutput.scrollHeight;
+  }
 }
 
 function closeTerminal() {
@@ -168,6 +196,7 @@ function printTerminal(text) {
 
   terminalOutput.textContent += "\n\n" + text;
   terminalOutput.scrollTop = terminalOutput.scrollHeight;
+  saveTerminalHistory();
 }
 
 function revealSecretLab() {
@@ -212,10 +241,10 @@ function runCommand(rawCommand) {
   if (command === "help") {
     printTerminal(
       "Available commands:\n" +
+      "profile\n" +
       "projects\n" +
       "experiences\n" +
       "systems\n" +
-      "profile\n" +
       "vote\n" +
       "contact\n" +
       "element\n" +
@@ -226,19 +255,18 @@ function runCommand(rawCommand) {
       "mission\n" +
       "clear"
     );
-  } else if (command === "projects") {
-  printTerminal("Opening project archive...");
-  window.location.href = "/projects/";
-} else if (command === "experiences" || command === "experience") {
-  printTerminal("Opening operating record...");
-  window.location.href = "/experiences/";
-} else if (command === "systems") {
-  printTerminal("Opening systems archive...");
-  window.location.href = "/systems/";
-}
-  else if (command === "profile") {
+  } else if (command === "profile") {
     printTerminal("Opening identity layer...");
     window.location.href = "/profile/";
+  } else if (command === "projects") {
+    printTerminal("Opening project archive...");
+    window.location.href = "/projects/";
+  } else if (command === "experiences" || command === "experience") {
+    printTerminal("Opening operating record...");
+    window.location.href = "/experiences/";
+  } else if (command === "systems") {
+    printTerminal("Opening systems archive...");
+    window.location.href = "/systems/";
   } else if (command === "vote") {
     printTerminal("Vote system opened.");
     window.location.href = "/vote/";
@@ -269,6 +297,7 @@ function runCommand(rawCommand) {
     printTerminal("Mission: build systems that survive contact with reality.");
   } else if (command === "clear") {
     terminalOutput.textContent = "Terminal cleared.";
+    sessionStorage.removeItem(TERMINAL_HISTORY_KEY);
   } else {
     printTerminal("Unknown command. Type help.");
   }
