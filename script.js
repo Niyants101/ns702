@@ -189,8 +189,6 @@ function revealSecretLab() {
     document.body.appendChild(link);
   }
 
-  sessionStorage.setItem("ns702LabUnlocked", "true");
-
   flash.classList.add("show");
 
   setTimeout(() => {
@@ -202,10 +200,6 @@ function revealSecretLab() {
   }, 1100);
 
   showToast("RESTRICTED LAYER UNLOCKED");
-}
-
-if (sessionStorage.getItem("ns702LabUnlocked") === "true") {
-  revealSecretLab();
 }
 
 function runCommand(rawCommand) {
