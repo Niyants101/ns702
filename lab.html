@@ -112,6 +112,24 @@
     </div>
   </footer>
 
+  <button class="terminal-button" id="terminalButton" aria-label="Open terminal">&gt;_</button>
+
+<div class="terminal" id="terminal">
+  <div class="terminal-head">
+    <span>NS702 TERMINAL</span>
+    <button class="terminal-close" id="terminalClose">×</button>
+  </div>
+
+  <div class="terminal-output" id="terminalOutput">Type "help" to begin.</div>
+
+  <div class="terminal-input-row">
+    <span>&gt;</span>
+    <input class="terminal-input" id="terminalInput" autocomplete="off" />
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
   <script src="/script.js"></script>
 </body>
 </html>
