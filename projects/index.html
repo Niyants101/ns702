@@ -3,70 +3,113 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Projects | NS702</title>
+
+  <title>NS702 | Projects</title>
   <link rel="stylesheet" href="/style.css" />
 </head>
-<body>
-  <div class="cursor-glow"></div>
-  <div class="noise"></div>
 
-  <header class="nav">
-    <a class="logo" href="/">NS702</a>
-    <nav>
-<a href="/">Home</a>
-<a href="/projects/">Projects</a>
-<a href="/systems/">Systems</a>
-<a href="/profile/">Profile</a>
-<a href="/vote/">Vote</a>
-<a href="/contact/">Contact</a>
-<a href="/lab.html">Lab Notes</a>
-    </nav>
+<body>
+  <canvas id="particleCanvas"></canvas>
+  <div class="grid-layer"></div>
+  <div class="scanline"></div>
+
+  <nav>
+    <div class="nav-inner">
+      <a class="brand" href="/">
+        <span class="brand-mark"></span>
+        <span>NS702</span>
+      </a>
+
+      <div class="nav-links">
+        <a href="/projects/">Projects</a>
+        <a href="/systems/">Systems</a>
+        <a href="/profile/">Profile</a>
+        <a href="/vote/">Vote</a>
+        <a href="/contact/">Contact</a>
+        <a href="/lab.html">Lab Notes</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="page-header">
+    <div class="shell">
+      <div class="eyebrow">Project Archive</div>
+      <h1 class="page-title">Projects</h1>
+      <p class="page-intro">
+        Case files for builds, research, automation tools, robotics projects, and experiments that made it past the idea stage.
+      </p>
+    </div>
   </header>
 
-  <main class="snap-container">
-    <section class="snap-section lab-section projects-section">
-      <div class="section-shell">
-        <p class="section-label">02 / Workshop</p>
-        <h2>Project Showroom</h2>
-        <p>
-          These are the systems I want NS702 to highlight:
-          research, robotics, automation, and useful AI tools.
-        </p>
+  <section>
+    <div class="shell">
+      <div class="project-grid">
+        <a class="card" href="#" data-hover="Theory under review">
+          <div class="card-number">FILE 001</div>
+          <div class="status-label"><span class="dot"></span> STATUS ACTIVE</div>
+          <h3>Randomness Research</h3>
+          <p>
+            Research exploring whether true randomness is possible, how random number systems work,
+            and how randomness can be tested.
+          </p>
+          <div class="tags">
+            <span class="tag">Research</span>
+            <span class="tag">Math</span>
+            <span class="tag">Quantum</span>
+            <span class="tag">Statistics</span>
+          </div>
+        </a>
 
-        <div class="project-grid">
-          <article class="project-card">
-            <div class="project-number">01</div>
-            <h3>Random Number Research</h3>
-            <p>
-              Researching pseudo-random, hardware, and quantum randomness through
-              statistical testing and analysis.
-            </p>
-            <span>Research • Statistics • Computer Science</span>
-          </article>
+        <a class="card" href="#" data-hover="Signal system compiling">
+          <div class="card-number">FILE 002</div>
+          <div class="status-label"><span class="dot"></span> STATUS ACTIVE</div>
+          <h3>Marketplace Automation Tool</h3>
+          <p>
+            A personal AI system designed to find, analyze, and streamline resale opportunities from online listings.
+          </p>
+          <div class="tags">
+            <span class="tag">AI</span>
+            <span class="tag">Automation</span>
+            <span class="tag">Resale</span>
+            <span class="tag">Data</span>
+          </div>
+        </a>
 
-          <article class="project-card">
-            <div class="project-number">02</div>
-            <h3>Robotics Portfolio</h3>
-            <p>
-              A collection of robotics and engineering work involving sensors,
-              mechanical design, automation, and control systems.
-            </p>
-            <span>Robotics • CAD • Automation</span>
-          </article>
+        <a class="card" href="#" data-hover="Mark 01 initialized">
+          <div class="card-number">FILE 003</div>
+          <div class="status-label"><span class="dot"></span> STATUS EXPANDING</div>
+          <h3>Robotics and Engineering Builds</h3>
+          <p>
+            Mechanical, software, and robotics projects focused on practical systems and real world problem solving.
+          </p>
+          <div class="tags">
+            <span class="tag">Robotics</span>
+            <span class="tag">CAD</span>
+            <span class="tag">Systems</span>
+            <span class="tag">Prototypes</span>
+          </div>
+        </a>
 
-          <article class="project-card">
-            <div class="project-number">03</div>
-            <h3>Marketplace AI Tool</h3>
-            <p>
-              A personal AI system idea for finding profitable local deals,
-              comparing resale prices, and streamlining communication.
-            </p>
-            <span>AI • Business • Automation</span>
-          </article>
-        </div>
+        <a class="card" href="/vote/" data-hover="Vote system online">
+          <div class="card-number">GATE 004</div>
+          <div class="status-label"><span class="dot"></span> INTERACTIVE</div>
+          <h3>Vote System</h3>
+          <p>
+            A live interactive vote page for collecting choices, testing interactions, and making the archive feel active.
+          </p>
+          <div class="tags">
+            <span class="tag">Interactive</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">NS702</span>
+          </div>
+        </a>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
+
+  <footer>
+    <div class="shell">NS702 | Projects</div>
+  </footer>
 
   <script src="/script.js"></script>
 </body>
