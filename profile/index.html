@@ -3,54 +3,76 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Profile | NS702</title>
+
+  <title>NS702 | Profile</title>
   <link rel="stylesheet" href="/style.css" />
 </head>
-<body>
-  <div class="cursor-glow"></div>
-  <div class="noise"></div>
 
-  <header class="nav">
-    <a class="logo" href="/">NS702</a>
-    <nav>
-<a href="/">Home</a>
-<a href="/projects/">Projects</a>
-<a href="/systems/">Systems</a>
-<a href="/profile/">Profile</a>
-<a href="/vote/">Vote</a>
-<a href="/contact/">Contact</a>
-<a href="/lab.html">Lab Notes</a>
-    </nav>
+<body>
+  <canvas id="particleCanvas"></canvas>
+  <div class="grid-layer"></div>
+  <div class="scanline"></div>
+
+  <nav>
+    <div class="nav-inner">
+      <a class="brand" href="/">
+        <span class="brand-mark"></span>
+        <span>NS702</span>
+      </a>
+
+      <div class="nav-links">
+        <a href="/projects/">Projects</a>
+        <a href="/systems/">Systems</a>
+        <a href="/profile/">Profile</a>
+        <a href="/vote/">Vote</a>
+        <a href="/contact/">Contact</a>
+        <a href="/lab.html">Lab Notes</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="page-header">
+    <div class="shell">
+      <div class="eyebrow">Identity Layer</div>
+      <h1 class="page-title">Profile</h1>
+      <p class="page-intro">
+        The builder behind NS702. Robotics engineering, systems thinking, research, prototypes, and proof based learning.
+      </p>
+    </div>
   </header>
 
-  <main class="snap-container">
-    <section class="snap-section lab-section">
-      <div class="section-shell">
-        <p class="section-label">01 / Profile</p>
-        <h2>The Builder Behind The System</h2>
-        <p>
-          I’m Niyant Sithamraju, a robotics engineering student interested in robotics,
-          AI, automation, sensors, and mechanical systems. I like projects that feel
-          futuristic but still work in the real world.
-        </p>
+  <section>
+    <div class="shell">
+      <div class="profile-grid">
+        <div class="wide-card">
+          <h3>What I Build</h3>
+          <p>
+            I am interested in robotics, engineering, automation, AI tools, data, research, and systems that solve practical problems.
+            I like projects that move from idea to working prototype.
+          </p>
+        </div>
 
-        <div class="stat-grid">
-          <div class="stat-card">
-            <strong>Robotics</strong>
-            <span>Mechanical systems, sensors, automation</span>
-          </div>
-          <div class="stat-card">
-            <strong>AI</strong>
-            <span>Tools, logic, data, intelligent systems</span>
-          </div>
-          <div class="stat-card">
-            <strong>Engineering</strong>
-            <span>Design, testing, iteration, problem solving</span>
-          </div>
+        <div class="wide-card">
+          <h3>How I Think</h3>
+          <p>
+            I care about proof. Not just saying I know something, but showing the build, the process, the result,
+            the failure points, and what I learned.
+          </p>
+        </div>
+
+        <div class="wide-card">
+          <h3>Current Direction</h3>
+          <p>
+            Build stronger technical projects, document them clearly, and turn NS702 into a real archive of my engineering growth.
+          </p>
         </div>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
+
+  <footer>
+    <div class="shell">NS702 | Profile</div>
+  </footer>
 
   <script src="/script.js"></script>
 </body>
