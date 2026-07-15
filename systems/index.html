@@ -3,72 +3,92 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Systems | NS702</title>
+
+  <title>NS702 | Systems</title>
   <link rel="stylesheet" href="/style.css" />
 </head>
-<body>
-  <div class="cursor-glow"></div>
-  <div class="noise"></div>
 
-  <header class="nav">
-    <a class="logo" href="/">NS702</a>
-    <nav>
-<a href="/">Home</a>
-<a href="/projects/">Projects</a>
-<a href="/systems/">Systems</a>
-<a href="/profile/">Profile</a>
-<a href="/vote/">Vote</a>
-<a href="/contact/">Contact</a>
-<a href="/lab.html">Lab Notes</a>
-    </nav>
+<body>
+  <canvas id="particleCanvas"></canvas>
+  <div class="grid-layer"></div>
+  <div class="scanline"></div>
+
+  <nav>
+    <div class="nav-inner">
+      <a class="brand" href="/">
+        <span class="brand-mark"></span>
+        <span>NS702</span>
+      </a>
+
+      <div class="nav-links">
+        <a href="/projects/">Projects</a>
+        <a href="/systems/">Systems</a>
+        <a href="/profile/">Profile</a>
+        <a href="/vote/">Vote</a>
+        <a href="/contact/">Contact</a>
+        <a href="/lab.html">Lab Notes</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="page-header">
+    <div class="shell">
+      <div class="eyebrow">Systems Index</div>
+      <h1 class="page-title">Systems</h1>
+      <p class="page-intro">
+        The tools, frameworks, technical areas, and build systems behind NS702.
+      </p>
+    </div>
   </header>
 
-  <main class="snap-container">
-    <section class="snap-section systems-section">
-      <div class="terminal-panel">
-        <div class="terminal-top">
-          <span></span>
-          <span></span>
-          <span></span>
+  <section>
+    <div class="shell">
+      <div class="system-grid">
+        <div class="card" data-hover="Mechanical layer online">
+          <div class="card-number">SYSTEM 001</div>
+          <h3>Mechanical Systems</h3>
+          <p>
+            Robotics, CAD, sensors, prototypes, physical builds, assembly, testing, and design iteration.
+          </p>
+          <div class="tags">
+            <span class="tag">CAD</span>
+            <span class="tag">Robotics</span>
+            <span class="tag">Hardware</span>
+          </div>
         </div>
 
-        <div class="terminal-body">
-          <p>> loading skill matrix...</p>
-          <p>> robotics systems: active</p>
-          <p>> ai tools: active</p>
-          <p>> engineering archive: active</p>
-          <p>> mission status: building the future</p>
+        <div class="card" data-hover="Software layer online">
+          <div class="card-number">SYSTEM 002</div>
+          <h3>Software Systems</h3>
+          <p>
+            Python, GitHub, automation, data pipelines, JavaScript, websites, and practical tool building.
+          </p>
+          <div class="tags">
+            <span class="tag">Python</span>
+            <span class="tag">JavaScript</span>
+            <span class="tag">GitHub</span>
+          </div>
         </div>
-      </div>
 
-      <div class="systems-content">
-        <p class="section-label">03 / Systems</p>
-        <h2>Skills Matrix</h2>
-
-        <div class="skill-list">
-          <div>
-            <span>Mechanical Design</span>
-            <div class="bar"><i style="width: 88%"></i></div>
-          </div>
-
-          <div>
-            <span>Robotics</span>
-            <div class="bar"><i style="width: 84%"></i></div>
-          </div>
-
-          <div>
-            <span>Programming</span>
-            <div class="bar"><i style="width: 80%"></i></div>
-          </div>
-
-          <div>
-            <span>AI Tools</span>
-            <div class="bar"><i style="width: 86%"></i></div>
+        <div class="card" data-hover="Research layer online">
+          <div class="card-number">SYSTEM 003</div>
+          <h3>Research Systems</h3>
+          <p>
+            Statistical testing, randomness, simulations, experimental design, technical writing, and source analysis.
+          </p>
+          <div class="tags">
+            <span class="tag">Research</span>
+            <span class="tag">Statistics</span>
+            <span class="tag">Simulation</span>
           </div>
         </div>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
+
+  <footer>
+    <div class="shell">NS702 | Systems</div>
+  </footer>
 
   <script src="/script.js"></script>
 </body>
