@@ -21,11 +21,11 @@
       </a>
 
       <div class="nav-links">
-  <a href="/profile/">Profile</a>
-  <a href="/projects/">Projects</a>
-  <a href="/systems/">Systems</a>
-  <a href="/vote/">Vote</a>
-  <a href="/contact/">Contact</a>
+        <a href="/profile/">Profile</a>
+        <a href="/projects/">Projects</a>
+        <a href="/systems/">Systems</a>
+        <a href="/vote/">Vote</a>
+        <a href="/contact/">Contact</a>
       </div>
     </div>
   </nav>
@@ -35,7 +35,7 @@
       <div class="eyebrow">Interactive System</div>
       <h1 class="page-title">Vote</h1>
       <p class="page-intro">
-        Choose what NS702 should focus on next. This is a local browser vote for now.
+        Choose what NS702 should focus on next. Each browser gets one vote, and everyone can see the shared live count.
       </p>
     </div>
   </header>
@@ -48,27 +48,26 @@
             <h3>Project Case Files</h3>
             <p>More detailed writeups for finished projects, prototypes, failures, and upgrades.</p>
             <div class="vote-bar"><div class="vote-fill" id="bar-projects"></div></div>
-            <div class="vote-count" id="count-projects">0 votes</div>
+            <div class="vote-count" id="count-projects">Loading...</div>
           </div>
 
           <div class="vote-option" data-vote="showroom">
             <h3>Visual Showroom</h3>
             <p>More photos, demos, videos, screenshots, and visual proof of builds.</p>
             <div class="vote-bar"><div class="vote-fill" id="bar-showroom"></div></div>
-            <div class="vote-count" id="count-showroom">0 votes</div>
+            <div class="vote-count" id="count-showroom">Loading...</div>
           </div>
 
           <div class="vote-option" data-vote="lab">
             <h3>Secret Lab Notes</h3>
             <p>More hidden notes, experiments, unfinished ideas, and early build concepts.</p>
             <div class="vote-bar"><div class="vote-fill" id="bar-lab"></div></div>
-            <div class="vote-count" id="count-lab">0 votes</div>
+            <div class="vote-count" id="count-lab">Loading...</div>
           </div>
         </div>
 
-        <div style="margin-top: 24px; display: flex; gap: 12px; flex-wrap: wrap;">
-          <button class="btn primary" id="resetVotes">Reset Local Votes</button>
-          <a class="btn" href="/">Return Home</a>
+        <div class="console" id="voteStatus" style="margin-top: 24px;">
+> connecting to shared vote system
         </div>
       </div>
     </div>
@@ -80,62 +79,157 @@
 
   <script src="/script.js"></script>
 
-  <script>
-    const defaultVotes = {
-      projects: 0,
-      showroom: 0,
-      lab: 0
-    };
+  <script type="module">
+    import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
 
-    function getVotes() {
-      const savedVotes = localStorage.getItem("ns702Votes");
+    const SUPABASE_URL = "https://gcgzgxdyophhvccmzpxo.supabase.co";
+    const SUPABASE_ANON_KEY = "sb_publishable_gEhvK5jsdrnumxd7aRPOHg_2R7JJZUd";
 
-      if (!savedVotes) {
-        return { ...defaultVotes };
-      }
+    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-      try {
-        return JSON.parse(savedVotes);
-      } catch {
-        return { ...defaultVotes };
-      }
+    const DEVICE_KEY = "ns702_device_id";
+
+    let deviceId = localStorage.getItem(DEVICE_KEY);
+
+    if (!deviceId) {
+      deviceId = crypto.randomUUID();
+      localStorage.setItem(DEVICE_KEY, deviceId);
     }
 
-    function saveVotes(votes) {
-      localStorage.setItem("ns702Votes", JSON.stringify(votes));
+    const voteStatus = document.getElementById("voteStatus");
+    const voteOptions = document.querySelectorAll(".vote-option");
+
+    let currentUserVote = null;
+
+    function setStatus(message) {
+      voteStatus.textContent = "> " + message;
     }
 
-    function renderVotes() {
-      const votes = getVotes();
-      const total = votes.projects + votes.showroom + votes.lab || 1;
+    function blankCounts() {
+      return {
+        projects: 0,
+        showroom: 0,
+        lab: 0
+      };
+    }
 
-      Object.keys(votes).forEach((key) => {
+    function markSelected() {
+      voteOptions.forEach((option) => {
+        const key = option.dataset.vote;
+
+        if (key === currentUserVote) {
+          option.style.borderColor = "rgba(127, 255, 212, 0.75)";
+          option.style.boxShadow = "0 0 60px rgba(127, 255, 212, 0.18)";
+        } else {
+          option.style.borderColor = "";
+          option.style.boxShadow = "";
+        }
+      });
+    }
+
+    function renderVotes(rows) {
+      const counts = blankCounts();
+
+      currentUserVote = null;
+
+      rows.forEach((row) => {
+        if (counts[row.choice] !== undefined) {
+          counts[row.choice] += 1;
+        }
+
+        if (row.device_id === deviceId) {
+          currentUserVote = row.choice;
+        }
+      });
+
+      const total = counts.projects + counts.showroom + counts.lab || 1;
+
+      Object.keys(counts).forEach((key) => {
         const countElement = document.getElementById("count-" + key);
         const barElement = document.getElementById("bar-" + key);
-        const percent = Math.round((votes[key] / total) * 100);
+        const percent = Math.round((counts[key] / total) * 100);
 
-        countElement.textContent = votes[key] + " votes | " + percent + "%";
+        countElement.textContent = counts[key] + " votes | " + percent + "%";
         barElement.style.width = percent + "%";
       });
+
+      markSelected();
+
+      if (currentUserVote) {
+        setStatus("vote recorded for this device: " + currentUserVote);
+      } else {
+        setStatus("connected. choose one option. this device can vote once.");
+      }
     }
 
-    document.querySelectorAll(".vote-option").forEach((option) => {
-      option.addEventListener("click", () => {
-        const voteKey = option.dataset.vote;
-        const votes = getVotes();
+    async function loadVotes() {
+      const { data, error } = await supabase
+        .from("ns702_votes")
+        .select("device_id, choice, created_at")
+        .order("created_at", { ascending: true });
 
-        votes[voteKey] += 1;
-        saveVotes(votes);
-        renderVotes();
+      if (error) {
+        setStatus("database error: " + error.message);
+        return;
+      }
+
+      renderVotes(data || []);
+    }
+
+    async function submitVote(choice) {
+      if (currentUserVote) {
+        setStatus("this device already voted. current vote: " + currentUserVote);
+        return;
+      }
+
+      const { error } = await supabase
+        .from("ns702_votes")
+        .insert({
+          device_id: deviceId,
+          choice: choice
+        });
+
+      if (error) {
+        if (error.code === "23505") {
+          setStatus("this device already voted.");
+        } else {
+          setStatus("vote blocked: " + error.message);
+        }
+
+        await loadVotes();
+        return;
+      }
+
+      setStatus("vote recorded: " + choice);
+      await loadVotes();
+    }
+
+    voteOptions.forEach((option) => {
+      option.addEventListener("click", () => {
+        submitVote(option.dataset.vote);
       });
     });
 
-    document.getElementById("resetVotes").addEventListener("click", () => {
-      saveVotes({ ...defaultVotes });
-      renderVotes();
-    });
+    const channel = supabase
+      .channel("ns702-vote-updates")
+      .on(
+        "postgres_changes",
+        {
+          event: "INSERT",
+          schema: "public",
+          table: "ns702_votes"
+        },
+        () => {
+          loadVotes();
+        }
+      )
+      .subscribe((status) => {
+        if (status === "SUBSCRIBED") {
+          setStatus("connected to shared vote system");
+        }
+      });
 
-    renderVotes();
+    loadVotes();
   </script>
 </body>
 </html>
