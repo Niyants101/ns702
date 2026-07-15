@@ -1143,3 +1143,277 @@ footer {
 .secret-lab-flash.show {
   opacity: 1;
 }
+
+.experience-hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.experience-command-strip {
+  margin-top: 34px;
+  display: grid;
+  grid-template-columns: 0.8fr 1.5fr 0.8fr;
+  gap: 14px;
+}
+
+.experience-command-strip div {
+  border: 1px solid var(--line);
+  background: rgba(8, 13, 24, 0.72);
+  border-radius: 18px;
+  padding: 16px;
+  box-shadow: var(--shadow);
+}
+
+.experience-command-strip span {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+
+.experience-command-strip strong {
+  color: var(--aqua);
+  font-family: "Courier New", monospace;
+  font-size: 13px;
+  letter-spacing: 1px;
+}
+
+.experience-stats {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.stat-tile {
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(135deg, rgba(119, 167, 255, 0.12), rgba(127, 255, 212, 0.04)),
+    rgba(8, 13, 24, 0.76);
+  border-radius: 24px;
+  padding: 22px;
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+
+.stat-tile::after {
+  content: "";
+  position: absolute;
+  right: -42px;
+  top: -42px;
+  width: 112px;
+  height: 112px;
+  border-radius: 50%;
+  border: 1px solid rgba(127, 255, 212, 0.18);
+}
+
+.stat-tile span {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+
+.stat-tile strong {
+  display: block;
+  font-size: clamp(34px, 5vw, 58px);
+  line-height: 0.9;
+  margin-bottom: 14px;
+}
+
+.stat-tile p {
+  color: var(--muted);
+  line-height: 1.6;
+  margin: 0;
+  font-size: 14px;
+}
+
+.experience-section {
+  padding-top: 50px;
+}
+
+.experience-timeline {
+  position: relative;
+  display: grid;
+  gap: 24px;
+}
+
+.experience-timeline::before {
+  content: "";
+  position: absolute;
+  left: 22px;
+  top: 10px;
+  bottom: 10px;
+  width: 1px;
+  background: linear-gradient(to bottom, transparent, rgba(127, 255, 212, 0.45), transparent);
+}
+
+.experience-record {
+  border: 1px solid var(--line);
+  background:
+    linear-gradient(135deg, rgba(119, 167, 255, 0.08), rgba(127, 255, 212, 0.035)),
+    rgba(8, 13, 24, 0.78);
+  border-radius: 28px;
+  padding: 26px;
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+  margin-left: 54px;
+  transition: 0.25s;
+}
+
+.experience-record:hover {
+  transform: translateY(-5px);
+  border-color: rgba(127, 255, 212, 0.38);
+}
+
+.experience-record::before {
+  content: "";
+  position: absolute;
+  left: -43px;
+  top: 30px;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  background: var(--aqua);
+  box-shadow: 0 0 24px rgba(127, 255, 212, 0.85);
+}
+
+.experience-record::after {
+  content: "";
+  position: absolute;
+  right: -90px;
+  top: -90px;
+  width: 230px;
+  height: 230px;
+  border: 1px solid rgba(119, 167, 255, 0.12);
+  border-radius: 50%;
+}
+
+.featured-record {
+  border-color: rgba(127, 255, 212, 0.36);
+}
+
+.record-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 22px;
+  align-items: start;
+  margin-bottom: 22px;
+}
+
+.record-code {
+  color: var(--aqua);
+  font-family: "Courier New", monospace;
+  font-size: 12px;
+  letter-spacing: 3px;
+  margin-bottom: 12px;
+}
+
+.record-top h3 {
+  margin: 0;
+  font-size: clamp(28px, 4vw, 48px);
+  line-height: 1;
+}
+
+.record-role {
+  color: var(--muted);
+  margin: 12px 0 0;
+  line-height: 1.6;
+}
+
+.record-date {
+  min-width: 190px;
+  border: 1px solid var(--line);
+  background: rgba(2, 3, 10, 0.36);
+  border-radius: 18px;
+  padding: 14px;
+  text-align: right;
+}
+
+.record-date span {
+  display: block;
+  color: var(--muted);
+  font-size: 12px;
+  margin-bottom: 8px;
+}
+
+.record-date strong {
+  color: var(--aqua);
+  font-family: "Courier New", monospace;
+  font-size: 13px;
+}
+
+.record-grid {
+  display: grid;
+  grid-template-columns: 1.25fr 0.75fr;
+  gap: 22px;
+  align-items: start;
+}
+
+.record-copy p {
+  color: var(--muted);
+  line-height: 1.75;
+  margin: 0 0 14px;
+}
+
+.record-copy p:last-child {
+  margin-bottom: 0;
+}
+
+.record-proof {
+  display: grid;
+  gap: 12px;
+}
+
+.proof-item {
+  border: 1px solid var(--line);
+  background: rgba(2, 3, 10, 0.38);
+  border-radius: 18px;
+  padding: 14px;
+}
+
+.proof-item span {
+  display: block;
+  color: var(--muted);
+  font-size: 11px;
+  letter-spacing: 2px;
+  margin-bottom: 8px;
+}
+
+.proof-item strong {
+  color: #eaf3ff;
+  font-size: 14px;
+}
+
+@media (max-width: 900px) {
+  .experience-command-strip,
+  .experience-stats,
+  .record-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .record-top {
+    flex-direction: column;
+  }
+
+  .record-date {
+    text-align: left;
+    width: 100%;
+  }
+
+  .experience-record {
+    margin-left: 32px;
+  }
+
+  .experience-timeline::before {
+    left: 13px;
+  }
+
+  .experience-record::before {
+    left: -28px;
+  }
+}
