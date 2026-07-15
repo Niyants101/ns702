@@ -213,6 +213,7 @@ function runCommand(rawCommand) {
     printTerminal(
       "Available commands:\n" +
       "projects\n" +
+      "experiences\n" +
       "systems\n" +
       "profile\n" +
       "vote\n" +
@@ -226,12 +227,16 @@ function runCommand(rawCommand) {
       "clear"
     );
   } else if (command === "projects") {
-    printTerminal("Opening project archive...");
-    window.location.href = "/projects/";
-  } else if (command === "systems") {
-    printTerminal("Opening systems archive...");
-    window.location.href = "/systems/";
-  } else if (command === "profile") {
+  printTerminal("Opening project archive...");
+  window.location.href = "/projects/";
+} else if (command === "experiences" || command === "experience") {
+  printTerminal("Opening operating record...");
+  window.location.href = "/experiences/";
+} else if (command === "systems") {
+  printTerminal("Opening systems archive...");
+  window.location.href = "/systems/";
+}
+  else if (command === "profile") {
     printTerminal("Opening identity layer...");
     window.location.href = "/profile/";
   } else if (command === "vote") {
