@@ -3,38 +3,62 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Contact | NS702</title>
+
+  <title>NS702 | Contact</title>
   <link rel="stylesheet" href="/style.css" />
 </head>
-<body>
-  <div class="cursor-glow"></div>
-  <div class="noise"></div>
 
-  <header class="nav">
-    <a class="logo" href="/">NS702</a>
-    <nav>
-<a href="/">Home</a>
-<a href="/projects/">Projects</a>
-<a href="/systems/">Systems</a>
-<a href="/profile/">Profile</a>
-<a href="/vote/">Vote</a>
-<a href="/contact/">Contact</a>
-<a href="/lab.html">Lab Notes</a>
-    </nav>
+<body>
+  <canvas id="particleCanvas"></canvas>
+  <div class="grid-layer"></div>
+  <div class="scanline"></div>
+
+  <nav>
+    <div class="nav-inner">
+      <a class="brand" href="/">
+        <span class="brand-mark"></span>
+        <span>NS702</span>
+      </a>
+
+      <div class="nav-links">
+        <a href="/projects/">Projects</a>
+        <a href="/systems/">Systems</a>
+        <a href="/profile/">Profile</a>
+        <a href="/vote/">Vote</a>
+        <a href="/contact/">Contact</a>
+        <a href="/lab.html">Lab Notes</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="page-header">
+    <div class="shell">
+      <div class="eyebrow">Signal Channel</div>
+      <h1 class="page-title">Contact</h1>
+      <p class="page-intro">
+        For projects, research, collaboration, opportunities, or anything connected to NS702.
+      </p>
+    </div>
   </header>
 
-  <main class="snap-container">
-    <section class="snap-section lab-section contact-section">
-      <div class="section-shell contact-box">
-        <p class="section-label">04 / Signal</p>
-        <h2>Let’s Build Something</h2>
-        <p>
-          Want to connect, collaborate, or see what I’m building next?
-        </p>
-        <a class="button primary" href="mailto:nsithamraju@gmail.com">nsithamraju@gmail.com</a>
+  <section>
+    <div class="shell">
+      <div class="contact-box">
+        <div>
+          <h2>Open Signal</h2>
+          <p>Best way to reach me right now.</p>
+        </div>
+
+        <div>
+          <a class="btn primary" href="mailto:nsscience702@gmail.com">nsscience702@gmail.com</a>
+        </div>
       </div>
-    </section>
-  </main>
+    </div>
+  </section>
+
+  <footer>
+    <div class="shell">NS702 | Contact</div>
+  </footer>
 
   <script src="/script.js"></script>
 </body>
